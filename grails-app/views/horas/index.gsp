@@ -150,6 +150,9 @@
 					<g:link controller="horas" action="enviarpdfemail" params="${[mes:mes, ano:ano, usuarioempresa:session['usuarioempresa'].id]}">
 						<asset:image src="skin/email.png" title="${message(code: 'horas.email.label')}"/>
 					</g:link>
+					
+					<!--<asset:image id="grafico" src="skin/grafico.png" title="${message(code: 'horas.grafico.label')}"/>
+					-->
 								
 				</div><div class="clearer"></div>
 				<div class="ajaxmessage"></div>
@@ -235,7 +238,7 @@
 							    	<g:checkBox class="totaliza" name="totaliza" value="${horasInstance.totaliza}"/>
 							    </td>
 							    
-							    <td><g:textField class="centro" name="totaldia" id="totaldia${i}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
+							    <td><g:textField class="centro" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
 							    
 							    
 							    <td>

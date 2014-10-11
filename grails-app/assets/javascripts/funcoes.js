@@ -1,49 +1,51 @@
 $(document).ready(function(){
 	
-	var postData = $("#formupdate").serializeArray();
-    var formURL =  '/controledehoras/horas/atualizatotal'; 
-  
-    $.ajax( 
-    {
-        url : formURL,
-        type: "POST",
-        data : postData,
-        dataType: "json",
-        success:function(data, textStatus, jqXHR)
-        {
-        	
-        	var total=0;
-            var i = 0;
-            while (i<data.dias.length) {
-        		var campo = "totaldia"+i;
-        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
-        	    document.getElementById(campo).value=valor;
-        		total=total+data.totaldia[i];
-        		i++;
-        	}
-        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
-        	mostraGrafico(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        	{
-        	
-	        	var i = 0;
-	        	var errodiv='<ul class="errors" role="alert">';
-	        	var mensagem='';
-	        	var fechadiv="</div>"
-	        	while (i<jqXHR.responseJSON.length) {
-	        		mensagem = mensagem + '<li>' +  jqXHR.responseJSON[i] + '</li>'
-	        		i++;
-	        	}
-	        	var htmlfinal= errodiv + mensagem + fechadiv;
-	        	
-	        	$('.ajaxmessage').html('');
-	        	$('.ajaxerror').html('');
-	        	$('.ajaxerror').html(htmlfinal);
-        	
-        	}
-    });
-    	
+	/*$("#grafico").click(function(){*/
+		
+			var postData = $("#formupdate").serializeArray();
+		    var formURL =  '/controledehoras/horas/atualizatotal'; 
+		  
+		    $.ajax( 
+		    {
+		        url : formURL,
+		        type: "POST",
+		        data : postData,
+		        dataType: "json",
+		        success:function(data, textStatus, jqXHR)
+		        {
+		        	
+		        	var total=0;
+		            var i = 0;
+		            while (i<data.dias.length) {
+		        		var campo = "totaldia"+data.dias[i];
+		        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
+		        	    document.getElementById(campo).value=valor;
+		        		total=total+data.totaldia[i];
+		        		i++;
+		        	}
+		        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
+		        	mostraGrafico(data);
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        	{
+		        	
+			        	var i = 0;
+			        	var errodiv='<ul class="errors" role="alert">';
+			        	var mensagem='';
+			        	var fechadiv="</div>"
+			        	while (i<jqXHR.responseJSON.length) {
+			        		mensagem = mensagem + '<li>' +  jqXHR.responseJSON[i] + '</li>'
+			        		i++;
+			        	}
+			        	var htmlfinal= errodiv + mensagem + fechadiv;
+			        	
+			        	$('.ajaxmessage').html('');
+			        	$('.ajaxerror').html('');
+			        	$('.ajaxerror').html(htmlfinal);
+		        	
+		        	}
+		    });
+	/*});*/	
 
 	function mostraGrafico(data){
 		
@@ -82,7 +84,7 @@ $(document).ready(function(){
 		        },
 		        series: [{
 		            name: data.usuario,
-		            data: data.horas,
+		            data: data.totaldia,
 		            dataLabels: {
 		                enabled: true,
 		                rotation: -90,
@@ -125,7 +127,7 @@ $(document).ready(function(){
 		    	        	var total=0;
 		    	            var i = 0;
 		    	            while (i<data.dias.length) {
-		    	        		var campo = "totaldia"+i;
+		    	        		var campo = "totaldia"+data.dias[i];
 		    	        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
 		    	        	    document.getElementById(campo).value=valor;
 		    	        		total=total+data.totaldia[i];
@@ -177,7 +179,7 @@ $(document).ready(function(){
 		        	var total=0;
 		            var i = 0;
 		            while (i<data.dias.length) {
-		        		var campo = "totaldia"+i;
+		        		var campo = "totaldia"+data.dias[i];
 		        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
 		        	    document.getElementById(campo).value=valor;
 		        		total=total+data.totaldia[i];
@@ -228,7 +230,7 @@ $(document).ready(function(){
 	        	var total=0;
 	            var i = 0;
 	            while (i<data.dias.length) {
-	        		var campo = "totaldia"+i;
+	        		var campo = "totaldia"+data.dias[i];
 	        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
 	        	    document.getElementById(campo).value=valor;
 	        		total=total+data.totaldia[i];

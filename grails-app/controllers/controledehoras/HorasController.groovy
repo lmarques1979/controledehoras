@@ -445,7 +445,7 @@ class HorasController extends BaseController{
 		if(erro==0){
 			render(status:200,contentType: "application/json"){
 				//(totaldia:totaldia,mes:mes,ano:ano,dias:dias)
-				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome, horas:totaldia]
+				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome]
 			}
 		}else{
 			if(errobanco.size()>0){
@@ -476,7 +476,6 @@ class HorasController extends BaseController{
 		ano = params.ano[0]
 		def usuarioInstance=Usuario.get(usuarioLogado.id)
 		def nome=usuarioInstance.buscaNome(usuarioInstance)
-		
 		flash.message=null
 		flash.error=null
 		usuarioLogado
@@ -507,7 +506,6 @@ class HorasController extends BaseController{
 					totaldia.add(retorno.totaldia.round(3))
 					dias.add(retorno.dia)
 				}
-				
 				retorno.clearErrors()
 				retorno.save flush:true
 		
@@ -525,7 +523,7 @@ class HorasController extends BaseController{
 		}
 		if(erro==0){
 			render(status:200,contentType: "application/json"){
-				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome, horas:totaldia]
+				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome]
 			}
 		}else{
 			if(errobanco.size()>0){
