@@ -432,9 +432,10 @@ class HorasController extends BaseController{
 			if(retorno in Horas){
 				
 				retorno.totaliza=Long.valueOf(totaliza).longValue()
-				if(retorno.totaliza)
+				if(retorno.totaliza){
 					totaldia.add(retorno.totaldia.round(3))
 					dias.add(retorno.dia)
+				}
 			
 			}else{
 				erros=retorno

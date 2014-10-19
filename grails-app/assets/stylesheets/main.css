@@ -558,6 +558,13 @@ select{
 	font-size: 1em;
 }
 
+ input.centrovermelho, select.centrovermelho, textarea.centrovermelho {
+	text-align:center;
+	background-color: #fcfcfc;
+	border: 1px solid #cccccc;
+	font-size: 1em;
+	color:#ff0000;
+}
 input.total{
     background-color:transparent;
     border: 0px solid #cccccc;

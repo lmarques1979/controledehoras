@@ -238,8 +238,14 @@
 							    	<g:checkBox class="totaliza" name="totaliza" value="${horasInstance.totaliza}"/>
 							    </td>
 							    
-							    <td><g:textField class="centro" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
-							    
+							    <td>
+							    	<g:if test="${horasInstance.totaldia < 8}">
+										<g:textField class="centrovermelho" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
+							        </g:if>
+									<g:else>
+										<g:textField class="centro" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
+							        </g:else>
+							    	
 							    
 							    <td>
 							    	<g:form controller="horas" action="delete">
