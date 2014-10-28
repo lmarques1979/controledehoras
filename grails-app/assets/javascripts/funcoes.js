@@ -52,7 +52,7 @@ $(document).ready(function(){
 		 $('#container').highcharts({
 		        chart: {
 		            type: 'line',
-		            backgroundColor:'#fff'
+		            backgroundColor: '#fbf5ef'
 		        },
 		        title: {
 		            text: 'Horas do Mes ' + data.mes + ' de ' + data.ano + ' (' + document.getElementById("totalgeral").value + ')',

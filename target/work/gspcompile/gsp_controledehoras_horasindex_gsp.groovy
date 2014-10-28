@@ -263,25 +263,34 @@ printHtmlPart(46)
 invokeTag('hiddenField','g',237,['name':("totalizahidden"),'id':("totalizahidden"),'value':(horasInstance.totaliza)],-1)
 printHtmlPart(47)
 invokeTag('checkBox','g',238,['class':("totaliza"),'name':("totaliza"),'value':(horasInstance.totaliza)],-1)
+printHtmlPart(46)
+if(true && (horasInstance.totaldia < 8)) {
 printHtmlPart(48)
-invokeTag('textField','g',241,['class':("centro"),'name':("totaldia"),'id':("totaldia${horasInstance.dia}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
+invokeTag('textField','g',243,['class':("centrovermelho"),'name':("totaldia"),'id':("totaldia${horasInstance.dia}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
 printHtmlPart(49)
+}
+else {
+printHtmlPart(48)
+invokeTag('textField','g',246,['class':("centro"),'name':("totaldia"),'id':("totaldia${horasInstance.dia}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
+printHtmlPart(49)
+}
+printHtmlPart(50)
 createTagBody(4, {->
-printHtmlPart(50)
-invokeTag('hiddenField','g',246,['name':("id"),'value':(horasInstance?.id)],-1)
-printHtmlPart(50)
-invokeTag('hiddenField','g',247,['name':("mes"),'value':(mes)],-1)
-printHtmlPart(50)
-invokeTag('hiddenField','g',248,['name':("ano"),'value':(ano)],-1)
-printHtmlPart(50)
-invokeTag('actionSubmitImage','g',249,['id':("submitimage"),'class':("tabela"),'controller':("horas"),'action':("delete"),'value':(message(code: 'button.delete.label')),'title':(message(code: 'button.delete.label')),'src':(assetPath(src:'skin/remove.png')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
+printHtmlPart(48)
+invokeTag('hiddenField','g',252,['name':("id"),'value':(horasInstance?.id)],-1)
+printHtmlPart(48)
+invokeTag('hiddenField','g',253,['name':("mes"),'value':(mes)],-1)
+printHtmlPart(48)
+invokeTag('hiddenField','g',254,['name':("ano"),'value':(ano)],-1)
+printHtmlPart(48)
+invokeTag('actionSubmitImage','g',255,['id':("submitimage"),'class':("tabela"),'controller':("horas"),'action':("delete"),'value':(message(code: 'button.delete.label')),'title':(message(code: 'button.delete.label')),'src':(assetPath(src:'skin/remove.png')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
 printHtmlPart(51)
 })
-invokeTag('form','g',251,['controller':("horas"),'action':("delete")],4)
+invokeTag('form','g',257,['controller':("horas"),'action':("delete")],4)
 printHtmlPart(52)
 if(true && (horasInstance.totaliza)) {
 printHtmlPart(53)
-invokeTag('set','g',256,['var':("total"),'value':(total + horasInstance.totaldia)],-1)
+invokeTag('set','g',262,['var':("total"),'value':(total + horasInstance.totaldia)],-1)
 printHtmlPart(39)
 }
 printHtmlPart(54)
@@ -289,15 +298,15 @@ i++
 }
 }
 printHtmlPart(55)
-invokeTag('textField','g',263,['class':("total"),'name':("totalgeral"),'id':("totalgeral"),'size':("6"),'value':(formatNumber(number:total,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
+invokeTag('textField','g',269,['class':("total"),'name':("totalgeral"),'id':("totalgeral"),'size':("6"),'value':(formatNumber(number:total,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
 printHtmlPart(56)
-invokeTag('submitButton','g',270,['id':("formupdatesubmit"),'name':("create"),'class':("save"),'value':(message(code: 'button.create.label', default: 'Create'))],-1)
+invokeTag('submitButton','g',276,['id':("formupdatesubmit"),'name':("create"),'class':("save"),'value':(message(code: 'button.create.label', default: 'Create'))],-1)
 printHtmlPart(29)
 })
-invokeTag('form','g',275,['id':("formupdate"),'url':([resource:horasInstance, action:'update'])],2)
+invokeTag('form','g',281,['id':("formupdate"),'url':([resource:horasInstance, action:'update'])],2)
 printHtmlPart(57)
 })
-invokeTag('captureBody','sitemesh',281,[:],1)
+invokeTag('captureBody','sitemesh',287,[:],1)
 printHtmlPart(58)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -305,7 +314,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1412998741000L
+public static final long LAST_MODIFIED = 1413755370000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
