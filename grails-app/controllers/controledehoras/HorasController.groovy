@@ -401,7 +401,7 @@ class HorasController extends BaseController{
 		def mes, ano, totaliza
 		def idHora=params.list('idalteracao')
 		def total = idHora.size()
-		def totaldia=[]
+		def horas=[]
 		def errobanco=[]
 		def erros=[]
 		def dias=[]
@@ -432,11 +432,9 @@ class HorasController extends BaseController{
 			if(retorno in Horas){
 				
 				retorno.totaliza=Long.valueOf(totaliza).longValue()
-				if(retorno.totaliza){
-					totaldia.add(retorno.totaldia.round(3))
-					dias.add(retorno.dia)
-				}
-			
+				retorno.totaldia = retorno.totaldia.round(3)
+				horas.add(retorno)
+
 			}else{
 				erros=retorno
 				erro++
@@ -446,7 +444,7 @@ class HorasController extends BaseController{
 		if(erro==0){
 			render(status:200,contentType: "application/json"){
 				//(totaldia:totaldia,mes:mes,ano:ano,dias:dias)
-				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome]
+				[horas: horas, usuario:nome]
 			}
 		}else{
 			if(errobanco.size()>0){
@@ -467,11 +465,10 @@ class HorasController extends BaseController{
 		def mes, ano, obs, totaliza
 		def idHora=params.list('idalteracao')
 		def total = idHora.size()
-		def totaldia=[]
+		def horas=[]
 		def errobanco=[]
 		def erros=[]
 		def erro=0
-		def dias=[]
 		def idhorario , ind
 		mes = params.mes[0]
 		ano = params.ano[0]
@@ -480,6 +477,7 @@ class HorasController extends BaseController{
 		flash.message=null
 		flash.error=null
 		usuarioLogado
+		
 		for(int i=0 ; i < total ; i++){
 			if(total>1){
 				obs = params.observacao[i]
@@ -503,10 +501,9 @@ class HorasController extends BaseController{
 				
 				retorno.observacao=obs
 				retorno.totaliza=Long.valueOf(totaliza).longValue()
-				if(retorno.totaliza){
-					totaldia.add(retorno.totaldia.round(3))
-					dias.add(retorno.dia)
-				}
+				retorno.totaldia = retorno.totaldia.round(3)
+				horas.add(retorno)
+					
 				retorno.clearErrors()
 				retorno.save flush:true
 		
@@ -524,7 +521,7 @@ class HorasController extends BaseController{
 		}
 		if(erro==0){
 			render(status:200,contentType: "application/json"){
-				[totaldia:totaldia,mes:mes,ano:ano,dias:dias, usuario:nome]
+				[horas:horas, usuario:nome]
 			}
 		}else{
 			if(errobanco.size()>0){

@@ -1,5 +1,60 @@
 $(document).ready(function(){
 	
+	function mostraGrafico(grafico){
+		
+		 $('#container').highcharts({
+		        chart: {
+		            type: 'line',
+		            backgroundColor: '#fbf5ef'
+		        },
+		        title: {
+		            text: 'Horas do Mes ' + grafico['mes'] + ' de ' + grafico['ano'] + ' (' + document.getElementById("totalgeral").value + ')',
+		            margin:50
+		        },
+		        subtitle: {
+		            text: ''
+		        },
+		        xAxis: {
+		            categories: grafico['dias'],
+		            title: {
+		                text: 'Dia do Mes'
+		            }
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Quantidade Horas (dia)'
+		            },
+		            gridLineWidth:0,
+		            tickInterval: 0.1
+		        },
+		        plotOptions: {
+		            line: {
+		                dataLabels: {
+		                    enabled: true
+		                },
+		                enableMouseTracking: false
+		            }
+		        },
+		        series: [{
+		            name: grafico['usuario'],
+		            data: grafico['totaldia'],
+		            dataLabels: {
+		                enabled: true,
+		                rotation: -90,
+		                color: '#000',
+		                align: 'top',
+		                x: 4,
+		                y: -10,
+		                style: {
+		                    fontSize: '11px',
+		                    fontFamily: 'Verdana, sans-serif',
+		                    textShadow: '0 0 3px #fff'
+		                }
+		            }
+		        }]
+		   });
+	}
+	
 	/*$("#grafico").click(function(){*/
 		
 			var postData = $("#formupdate").serializeArray();
@@ -16,15 +71,34 @@ $(document).ready(function(){
 		        	
 		        	var total=0;
 		            var i = 0;
-		            while (i<data.dias.length) {
-		        		var campo = "totaldia"+data.dias[i];
-		        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
-		        	    document.getElementById(campo).value=valor;
-		        		total=total+data.totaldia[i];
+		            var grafico = [];
+		            var dias =[];
+		            var totaldia=[];
+		            while (i<data.horas.length) {
+		        		var campo = "totaldia"+data.horas[i].id;
+		        		var valor = data.horas[i].totaldia.toFixed(3).replace(".",",");
+		        		var totaliza = data.horas[i].totaliza;
+		        		
+		        		dias.push(data.horas[i].dia);
+		        		totaldia.push(data.horas[i].totaldia);
+		        		
+    	        		if(totaliza=='1'){
+    	        			document.getElementById(campo).value=valor;
+    	        		}else{
+    	        			document.getElementById(campo).value=0;
+    	        		}
+		        		total=total+data.horas[i].totaldia;
 		        		i++;
 		        	}
+		            
+		            grafico['mes']  	= data.horas[0].mes;
+	        		grafico['ano']  	= data.horas[0].ano;
+	        		grafico['usuario']	= data.usuario;
+		            grafico['dias']  	= dias;
+		            grafico['totaldia'] = totaldia;
+		            
 		        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
-		        	mostraGrafico(data);
+		        	mostraGrafico(grafico);
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        	{
@@ -47,71 +121,24 @@ $(document).ready(function(){
 		    });
 	/*});*/	
 
-	function mostraGrafico(data){
-		
-		 $('#container').highcharts({
-		        chart: {
-		            type: 'line',
-		            backgroundColor: '#fbf5ef'
-		        },
-		        title: {
-		            text: 'Horas do Mes ' + data.mes + ' de ' + data.ano + ' (' + document.getElementById("totalgeral").value + ')',
-		            margin:50
-		        },
-		        subtitle: {
-		            text: ''
-		        },
-		        xAxis: {
-		            categories: data.dias,
-		            title: {
-		                text: 'Dia do Mes'
-		            }
-		        },
-		        yAxis: {
-		            title: {
-		                text: 'Quantidade Horas (dia)'
-		            },
-		            gridLineWidth:0,
-		            tickInterval: 0.1
-		        },
-		        plotOptions: {
-		            line: {
-		                dataLabels: {
-		                    enabled: true
-		                },
-		                enableMouseTracking: false
-		            }
-		        },
-		        series: [{
-		            name: data.usuario,
-		            data: data.totaldia,
-		            dataLabels: {
-		                enabled: true,
-		                rotation: -90,
-		                color: '#000',
-		                align: 'top',
-		                x: 4,
-		                y: -10,
-		                style: {
-		                    fontSize: '11px',
-		                    fontFamily: 'Verdana, sans-serif',
-		                    textShadow: '0 0 3px #fff'
-		                }
-		            }
-		        }]
-		   });
-	}
+	
 	
 	$(".totaliza").click(function(){
 			
-			var $hidden=$(this).closest("tr").find("#totalizahidden");
-	
+			var valorid = $(this).attr('data-idfoto');
+			var campo = "#totalizahidden" + valorid;
+			var $hidden=$(this).closest("tr").find(campo);
+						
 			if($(this).is(':checked')){
 				$hidden.val("1");
 			}else{
 				$hidden.val("0");
 			}
-			
+			atualizaCampo();
+	});
+	
+	function atualizaCampo(){
+		
 			var postData = $("#formupdate").serializeArray();
 			var formURL  = $("#formupdate").attr("action");  
 			
@@ -126,20 +153,41 @@ $(document).ready(function(){
 		    	        	
 		    	        	var total=0;
 		    	            var i = 0;
-		    	            while (i<data.dias.length) {
-		    	        		var campo = "totaldia"+data.dias[i];
-		    	        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
-		    	        	    document.getElementById(campo).value=valor;
-		    	        		total=total+data.totaldia[i];
+		    	            var grafico = [];
+				            var dias =[];
+				            var totaldia=[];
+		    	            while (i<data.horas.length) {
+		    	        		var campo = "totaldia"+data.horas[i].id;
+		    	        		var valor = data.horas[i].totaldia.toFixed(3).replace(".",",");
+		    	        		var totaliza = data.horas[i].totaliza;
+		    	        		var totalizahidden = "#totalizahidden" + data.horas[i].id;
+		    	        		var totaliza=data.horas[i].totaliza;
+		    	        				    	        		
+				        		if(totaliza=='1'){
+		    	        			document.getElementById(campo).value=valor;
+		    	        			total=total+data.horas[i].totaldia;
+		    	        			dias.push(data.horas[i].dia);
+					        		totaldia.push(data.horas[i].totaldia);
+		    	        		}else{
+		    	        			document.getElementById(campo).value='0,000';
+		    	        		}
+		    	        		
 		    	        		i++;
 		    	        	}
+		    	            
+		    	            grafico['mes']  	= data.horas[0].mes;
+			        		grafico['ano']  	= data.horas[0].ano;
+			        		grafico['usuario']	= data.usuario;
+				            grafico['dias']  	= dias;
+				            grafico['totaldia'] = totaldia;
+				            
 		    	        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
 		                    var sucessodiv = '<div class="message" role="status">Horario Salvo</div>'; 
 		                   
 		                    $('.ajaxmessage').html('');
 		    	        	$('.ajaxerror').html('');
 		                    $('.ajaxmessage').html(sucessodiv);
-		                    mostraGrafico(data);
+		                    mostraGrafico(grafico);
 		    	        },
 		    	        error: function(jqXHR, textStatus, errorThrown)
 		    	        {
@@ -161,7 +209,7 @@ $(document).ready(function(){
 		    });
 		    e.preventDefault(); //STOP default action
 		    
-		});
+		};
 	
 		$("#formupdatesubmit").click(function(e){
 		    var postData = $("#formupdate").serializeArray();
@@ -178,20 +226,38 @@ $(document).ready(function(){
 		        	
 		        	var total=0;
 		            var i = 0;
+		            var grafico = [];
+		            var dias =[];
+		            var totaldia=[];
+		            
 		            while (i<data.dias.length) {
-		        		var campo = "totaldia"+data.dias[i];
-		        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
-		        	    document.getElementById(campo).value=valor;
-		        		total=total+data.totaldia[i];
+		        		var campo = "totaldia"+data.horas[i].id;
+		        		var valor = data.horas[i].totaldia.toFixed(3).replace(".",",");
+		        		var totaliza = data.horas[i].totaliza;
+		        		
+    	        		if(totaliza=='1'){
+    	        			document.getElementById(campo).value=valor;
+    	        			total=total+data.horas[i].totaldia;
+    	        			dias.push(data.horas[i].dia);
+    		        		totaldia.push(data.horas[i].totaldia);
+    		        		
+    	        		}else{
+    	        			document.getElementById(campo).value='0,000';
+    	        		}
 		        		i++;
 		        	}
+		            grafico['mes']  	= data.horas[0].mes;
+	        		grafico['ano']  	= data.horas[0].ano;
+	        		grafico['usuario']	= data.usuario;
+		            grafico['dias']  	= dias;
+		            grafico['totaldia'] = totaldia;
 		        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
 	                var sucessodiv = '<div class="message" role="status">Horario Salvo</div>'; 
 	               
 	                $('.ajaxmessage').html('');
 		        	$('.ajaxerror').html('');
 	                $('.ajaxmessage').html(sucessodiv);
-	                mostraGrafico(data);
+	                mostraGrafico(grafico);
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -215,6 +281,7 @@ $(document).ready(function(){
 	  	});
 	
 	    $(".timeentry").blur(function(e){
+	    	
 	    var postData = $("#formupdate").serializeArray();
 	    var formURL =  '/controledehoras/horas/atualizatotal'; 
 	  
@@ -229,15 +296,32 @@ $(document).ready(function(){
 	        	
 	        	var total=0;
 	            var i = 0;
-	            while (i<data.dias.length) {
-	        		var campo = "totaldia"+data.dias[i];
-	        		var valor = data.totaldia[i].toFixed(3).replace(".",",");
-	        	    document.getElementById(campo).value=valor;
-	        		total=total+data.totaldia[i];
+	            var grafico = [];
+	            var dias =[];
+	            var totaldia=[];
+	            
+	            while (i<data.horas.length) {
+	        		var campo = "totaldia"+data.horas[i].id;
+	        		var valor = data.horas[i].totaldia.toFixed(3).replace(".",",");
+	        		var totaliza = data.horas[i].totaliza;
+	        		
+	        		if(totaliza=='1'){
+	        			document.getElementById(campo).value=valor;
+	        			total=total+data.horas[i].totaldia;
+	        			dias.push(data.horas[i].dia);
+		        		totaldia.push(data.horas[i].totaldia);
+	        		}else{
+	        			document.getElementById(campo).value='0,000';
+	        		}
 	        		i++;
 	        	}
+	            grafico['mes']  	= data.horas[0].mes;
+        		grafico['ano']  	= data.horas[0].ano;
+        		grafico['usuario']	= data.usuario;
+	            grafico['dias']  	= dias;
+	            grafico['totaldia'] = totaldia;
 	        	document.getElementById("totalgeral").value=total.toFixed(3).replace(".",",");
-	        	mostraGrafico(data);
+	        	mostraGrafico(grafico);
             },
 	        error: function(jqXHR, textStatus, errorThrown)
 	        {

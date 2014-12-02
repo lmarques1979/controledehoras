@@ -234,16 +234,16 @@
 							    </td>
 							    
 							    <td>
-							    	<g:hiddenField name="totalizahidden" id="totalizahidden" value="${horasInstance.totaliza}" />
-							    	<g:checkBox class="totaliza" name="totaliza" value="${horasInstance.totaliza}"/>
+							    	<g:hiddenField name="totalizahidden" id="totalizahidden${horasInstance.id}" value="${horasInstance.totaliza}" />
+							    	<g:checkBox data-idfoto="${horasInstance.id}" class="totaliza" name="totaliza" value="${horasInstance.totaliza}"/>
 							    </td>
 							    
 							    <td>
 							    	<g:if test="${horasInstance.totaldia < 8}">
-										<g:textField class="centrovermelho" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
+										<g:textField class="centrovermelho" name="totaldia" id="totaldia${horasInstance.id}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
 							        </g:if>
 									<g:else>
-										<g:textField class="centro" name="totaldia" id="totaldia${horasInstance.dia}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
+										<g:textField class="centro" name="totaldia" id="totaldia${horasInstance.id}" size="4" value="${formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)}" readonly="readonly" /></td>
 							        </g:else>
 							    	
 							    
