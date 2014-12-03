@@ -22,15 +22,15 @@ $(document).ready(function(){
 		        		var valor = data.horas[i].totaldia.toFixed(3).replace(".",",");
 		        		var totaliza = data.horas[i].totaliza;
 		        		
-		        		dias.push(data.horas[i].dia);
-		        		totaldia.push(data.horas[i].totaldia);
-		        		
-    	        		if(totaliza=='1'){
+		        		if(totaliza=='1'){
     	        			document.getElementById(campo).value=valor;
+    	        			total=total+data.horas[i].totaldia;
+    	        			dias.push(data.horas[i].dia);
+    		        		totaldia.push(data.horas[i].totaldia);
     	        		}else{
     	        			document.getElementById(campo).value=0;
     	        		}
-		        		total=total+data.horas[i].totaldia;
+		        		
 		        		i++;
 		        	}
 		            
