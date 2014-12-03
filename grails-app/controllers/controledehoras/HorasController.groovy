@@ -459,6 +459,7 @@ class HorasController extends BaseController{
 			}
 		}
 	}
+	
 	@Transactional
 	def update() {
 		

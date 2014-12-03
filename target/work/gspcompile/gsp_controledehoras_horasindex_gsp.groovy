@@ -260,18 +260,18 @@ invokeTag('textField','g',230,['name':("entrada5"),'size':("4"),'maxlength':("5"
 printHtmlPart(45)
 invokeTag('textField','g',233,['class':("centro"),'name':("observacao"),'size':("10"),'value':(horasInstance.observacao)],-1)
 printHtmlPart(46)
-invokeTag('hiddenField','g',237,['name':("totalizahidden"),'id':("totalizahidden"),'value':(horasInstance.totaliza)],-1)
+invokeTag('hiddenField','g',237,['name':("totalizahidden"),'id':("totalizahidden${horasInstance.id}"),'value':(horasInstance.totaliza)],-1)
 printHtmlPart(47)
-invokeTag('checkBox','g',238,['class':("totaliza"),'name':("totaliza"),'value':(horasInstance.totaliza)],-1)
+invokeTag('checkBox','g',238,['data-idfoto':(horasInstance.id),'class':("totaliza"),'name':("totaliza"),'value':(horasInstance.totaliza)],-1)
 printHtmlPart(46)
 if(true && (horasInstance.totaldia < 8)) {
 printHtmlPart(48)
-invokeTag('textField','g',243,['class':("centrovermelho"),'name':("totaldia"),'id':("totaldia${horasInstance.dia}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
+invokeTag('textField','g',243,['class':("centrovermelho"),'name':("totaldia"),'id':("totaldia${horasInstance.id}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
 printHtmlPart(49)
 }
 else {
 printHtmlPart(48)
-invokeTag('textField','g',246,['class':("centro"),'name':("totaldia"),'id':("totaldia${horasInstance.dia}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
+invokeTag('textField','g',246,['class':("centro"),'name':("totaldia"),'id':("totaldia${horasInstance.id}"),'size':("4"),'value':(formatNumber(number:horasInstance.totaldia,maxFractionDigits:3 , minFractionDigits:3)),'readonly':("readonly")],-1)
 printHtmlPart(49)
 }
 printHtmlPart(50)
@@ -314,7 +314,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1413755370000L
+public static final long LAST_MODIFIED = 1417523609000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
