@@ -29,13 +29,19 @@ expressionOut.print(hasErrors(bean: empresaInstance, field: 'imagem', 'error'))
 printHtmlPart(6)
 invokeTag('message','g',22,['code':("empresa.imagem.label"),'default':("Imagem")],-1)
 printHtmlPart(7)
+expressionOut.print(hasErrors(bean: empresaInstance, field: 'ativa', 'error'))
+printHtmlPart(8)
+invokeTag('message','g',30,['code':("empresa.ativa.label"),'default':("Ativa")],-1)
+printHtmlPart(5)
+invokeTag('checkBox','g',33,['name':("ativa"),'value':(empresaInstance?.ativa)],-1)
+printHtmlPart(9)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409072645000L
+public static final long LAST_MODIFIED = 1429563738000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

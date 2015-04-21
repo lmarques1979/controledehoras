@@ -67,28 +67,36 @@ invokeTag('image','asset',43,['height':("50"),'width':("200"),'src':(empresaInst
 printHtmlPart(18)
 }
 printHtmlPart(19)
-createTagBody(2, {->
+if(true && (empresaInstance?.ativa)) {
 printHtmlPart(20)
-createTagBody(3, {->
-invokeTag('message','g',54,['code':("default.button.edit.label"),'default':("Edit")],-1)
-})
-invokeTag('link','g',54,['class':("edit"),'action':("edit"),'resource':(empresaInstance)],3)
+invokeTag('message','g',51,['code':("empresa.ativa.label"),'default':("Ativa")],-1)
 printHtmlPart(21)
-invokeTag('actionSubmit','g',55,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
+invokeTag('formatBoolean','g',52,['boolean':(empresaInstance?.ativa)],-1)
+printHtmlPart(12)
+}
 printHtmlPart(22)
-})
-invokeTag('form','g',57,['url':([resource:empresaInstance, action:'delete']),'method':("DELETE")],2)
+createTagBody(2, {->
 printHtmlPart(23)
+createTagBody(3, {->
+invokeTag('message','g',61,['code':("default.button.edit.label"),'default':("Edit")],-1)
 })
-invokeTag('captureBody','sitemesh',59,[:],1)
+invokeTag('link','g',61,['class':("edit"),'action':("edit"),'resource':(empresaInstance)],3)
 printHtmlPart(24)
+invokeTag('actionSubmit','g',62,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
+printHtmlPart(25)
+})
+invokeTag('form','g',64,['url':([resource:empresaInstance, action:'delete']),'method':("DELETE")],2)
+printHtmlPart(26)
+})
+invokeTag('captureBody','sitemesh',66,[:],1)
+printHtmlPart(27)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409170201000L
+public static final long LAST_MODIFIED = 1429564417000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
