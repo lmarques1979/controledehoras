@@ -14,8 +14,28 @@ class UsuarioEmpresaController extends BaseController{
     def index(Integer max) {
         def configuracoes = configuracaoParams
 		configuracoes.max = Math.min(4, 1000)
+		def ativa
+		
+		println params
+		if(params.ativa!=null){
+			
+			if (params.ativa=='A'){
+				ativa=true
+			}
+			if(params.ativa=='I'){
+				ativa=false
+			}
+			
+		}else{
+			ativa=true
+		}
+		
 		def resultado = UsuarioEmpresa.createCriteria().list (configuracoes) {
+			createAlias("empresa", "empresa")
 			eq("usuario.id" , usuarioLogado.id)
+			if(params.ativa!='T'){
+				eq("empresa.ativa" , ativa)
+			}
 		}
 		
         respond resultado, model:[usuarioEmpresaInstanceCount: resultado.totalCount]

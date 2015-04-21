@@ -1,7 +1,5 @@
 <%@ page import="controledehoras.UsuarioEmpresa" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: usuarioEmpresaInstance, field: 'usuario', 'error')} required">
 	<label for="usuario">
 		<g:message code="usuarioEmpresa.usuario.label" default="Usuario" />

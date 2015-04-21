@@ -3,6 +3,12 @@
 	width:34px;
 }
 
+.ativa{
+	display:block;
+	margin:1.5em auto;
+	text-align: center;
+}
+
 div .loginprincipal{
 	float: right;
     height: 50px;

@@ -45,7 +45,14 @@
 					
 				</li>
 				</g:if>
-			
+				
+				<g:if test="${empresaInstance?.ativa}">
+				<li class="fieldcontain">
+					<span id="enabled-label" class="property-label"><g:message code="empresa.ativa.label" default="Ativa" /></span>
+					<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${empresaInstance?.ativa}" /></span>
+					
+				</li>
+				</g:if>
 				
 			
 			</ol>

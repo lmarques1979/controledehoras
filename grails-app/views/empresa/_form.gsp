@@ -25,3 +25,11 @@
 	<input type="file" name="arquivo"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'ativa', 'error')} ">
+	<label for="enabled">
+		<g:message code="empresa.ativa.label" default="Ativa" />
+		
+	</label>
+	<g:checkBox name="ativa" value="${empresaInstance?.ativa}" />
+
+</div>

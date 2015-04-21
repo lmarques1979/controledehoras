@@ -1,19 +1,36 @@
 
 <%@ page import="controledehoras.UsuarioEmpresa" %>
+<g:if test="${params.ativa}">
+	<g:set var="ativa" value="${params.ativa}" />
+</g:if>
+<g:else>
+	<g:set var="ativa" value="A" />
+</g:else>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'usuarioEmpresa.label', default: 'UsuarioEmpresa')}" />
 		<title><g:message code="empresalist.label"/></title>
+		<asset:javascript src="grafico.js"/>
+		
 	</head>
 	<body>
+	
 		<a href="#list-usuarioEmpresa" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="list-usuarioEmpresa" class="content scaffold-list" role="main">
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			
+			<div class="ativa"> 
+				<g:form url="[resource:usuarioEmpresaInstance, action:'index']" >
+					
+					<g:select onchange="this.form.submit()" value="${ativa}" name="ativa" from="${[message(code:'ativa.label'),message(code:'inativa.label'),message(code:'todos.label')]}" keys="${['A','I','T']}"/>
+					
+				</g:form>				
+			</div><div class="clearer"></div> 
 			
 			<div class="usuarioEmpresa">
 			

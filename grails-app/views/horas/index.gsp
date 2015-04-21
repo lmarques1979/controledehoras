@@ -26,11 +26,16 @@
 		<asset:javascript src="spinner_init.js"/>
 		<asset:javascript src="highcharts/modules/exporting.js"/>
 		<asset:javascript src="highcharts/highcharts.js"/>
-		<asset:javascript src="funcoes.js"/>
+		<asset:javascript src="grafico.js"/> 
+		<asset:javascript src="funcoes.js"/> 
+		<script type="text/javascript">
+			$(document).ready(function() {
+			   carregaTela(); 
+			});
+		</script>
 				
 	</head>
 	<body>
-		
 		
 		<a href="#list-horas" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
