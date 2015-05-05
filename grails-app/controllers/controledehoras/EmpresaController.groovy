@@ -9,7 +9,8 @@ import grails.transaction.Transactional
 class EmpresaController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
-
+	def FileUploadService
+	
     /*def index(Integer max) {
         def configuracoes = configuracaoParams
         respond Empresa.list(configuracoes), model:[empresaInstanceCount: Empresa.count()]
@@ -32,7 +33,7 @@ class EmpresaController extends BaseController{
 		
 		def f = request.getFile('arquivo')
 		if (!f.empty) {
-			def imagem = fileUpload(f)
+			def imagem = FileUploadService.fileUpload(f , 'timesheetlmdcm' , 'assets/')
 			empresaInstance.imagem = imagem
 		}
         
@@ -76,8 +77,8 @@ class EmpresaController extends BaseController{
 		
 		def f = request.getFile('arquivo')
 		if (!f.empty) {
-			def deleteS3 = fileDelete(empresaInstance.imagem)
-			def imagem = fileUpload(f)
+			def deleteS3 = FileUploadService.fileDelete(empresaInstance.imagem , 'timesheetlmdcm' , 'assets/')
+			def imagem = FileUploadService.fileUpload(f , 'timesheetlmdcm' , 'assets/')
 			empresaInstance.imagem = imagem
 		}
 		

@@ -9,26 +9,7 @@ import grails.transaction.Transactional
 @Secured("isAuthenticated()")
 class BaseController{
    
-	def configurationService
 	def springSecurityService
-	def bucket  = 'timesheetlmdcm'
-	def amazonWebService
-	def pasta = 'assets/' 
-	
-	def fileUpload(def f){
-		def nomearquivo = (new Date()).getTime() + "_" + f.getOriginalFilename()
-		File file = StreamUtil.stream2file(nomearquivo, f.getInputStream())
-		amazonWebService.s3.putObject(new PutObjectRequest(bucket, pasta + nomearquivo , file).withCannedAcl(CannedAccessControlList.PublicRead))
-		
-		return nomearquivo
-	}
-	
-	def fileDelete(def nomearquivo){
-		
-		if (nomearquivo!=null){
-			amazonWebService.s3.deleteObject(bucket, pasta+nomearquivo)
-		}
-	}
 	
 	def getConfiguracaoParams(){
 		

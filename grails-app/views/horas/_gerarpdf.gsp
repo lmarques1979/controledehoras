@@ -10,10 +10,27 @@
 		<title><g:message code="hora.list.label" /></title>
 		<style type="text/css" media="all">
 			
-			.pdf table{
-				margin:0 auto;
+			.pdf{
+				background:#fff;
+				width:100%;
+				border:1px solid #000;
+				border-collapse: collapse;
+				margin-bottom: 1em;
+			}
+			
+			.pdf thead th {
 				text-align:center;
-				font-family:arial;
+				background:#fff;
+				border:1px solid #000;
+				color:#000;
+				font-size:12px;
+			}
+			
+			.pdf tbody td {
+				text-align:center;
+				background:#fff;
+				border:1px solid #000;
+				color:#000;
 				font-size:12px;
 			}
 		</style>
@@ -21,8 +38,7 @@
 	</head>
 	<body> 
 		
-		<div class="pdf">
-			<table>
+		<table class="pdf">
 					<thead>
 							<tr>
 								<th colspan="13">Horas do usuário ${usuarioInstance.buscaNome(usuarioInstance)} mês ${mes} de ${ano}</th>
@@ -103,7 +119,7 @@
 						
 						
 						</tbody>
-			</table>
-		</div>
+		</table>
+
 	</body>
 </html>

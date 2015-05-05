@@ -9,6 +9,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class UsuarioController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+	def FileUploadService
 	
 	@Secured('permitAll')
 	def esqueceusenha() {
@@ -98,7 +99,7 @@ class UsuarioController extends BaseController{
 
 		def f = request.getFile('arquivo')
 		if (!f.empty) {
-			def imagem = fileUpload(f)
+			def imagem = FileUploadService.fileUpload(f , 'timesheetlmdcm' , 'assets/')
 			usuarioInstance.imagem = imagem
 		}
 		
@@ -133,8 +134,8 @@ class UsuarioController extends BaseController{
 		
 		def f = request.getFile('arquivo')
 		if (!f.empty) {
-			def deleteS3 = fileDelete(usuarioInstance.imagem)
-			def imagem = fileUpload(f)
+			def deleteS3 = FileUploadService.fileDelete(usuarioInstance.imagem , 'timesheetlmdcm' , 'assets/')
+			def imagem = FileUploadService.fileUpload(f , 'timesheetlmdcm' , 'assets/')
 			usuarioInstance.imagem = imagem
 		}
 		
