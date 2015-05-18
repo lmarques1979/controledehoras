@@ -130,7 +130,7 @@
 							
 							<td><g:textField name="entrada5" size="4" maxlength="5" class="timeentry"/></td>
 							
-							<td><g:textField name="observacao" size="10"/></td>
+							<td><g:textField name="observacao" size="20"/></td>
 							
 							
 						</tr>

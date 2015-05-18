@@ -457,6 +457,10 @@ ul {
 	background-image: url(../images/skin/usuario.png); 
 }
 
+.nav a.usuarios {
+	background-image: url(../images/skin/usuarios.png); 
+}
+
 .nav a:focus, .nav a:hover {
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -594,7 +598,7 @@ select[multiple] {
 }
 
 textarea {
-	height: 150px;
+	height:150px;
 	overflow: auto; /* IE always renders vertical scrollbar without this */
 	vertical-align: top;
 }

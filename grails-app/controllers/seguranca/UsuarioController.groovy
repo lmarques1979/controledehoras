@@ -172,7 +172,9 @@ class UsuarioController extends BaseController{
 			respond usuarioInstance.errors, view:'index'
 			return
 		}else{
-			boolean deletou = fileDelete(usuarioInstance.imagem)
+			if (usuarioInstance.imagem){
+				boolean deletou = fileDelete(usuarioInstance.imagem)
+			}
 		}
 				
 		if (usuarioDeletado==usuariologado){
