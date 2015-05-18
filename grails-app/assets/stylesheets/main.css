@@ -416,7 +416,7 @@ ul {
 
 
 .nav a , .nav a.logout, .nav a.cadastrousuario , .nav a.usuario, .nav a.cadempresa , .nav a.listempresa,
-.nav a.configuracao , .nav a.horas
+.nav a.configuracao , .nav a.horas, .nav a.usuarios
 {
 	color: #fff;
 	display: block;

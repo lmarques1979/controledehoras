@@ -1,5 +1,4 @@
 package myspringsecurity    
-
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.web.authentication.AjaxAwareAuthenticationSuccessHandler
 import javax.servlet.http.HttpServletRequest
@@ -14,10 +13,10 @@ class MyAuthenticationSuccessHandler extends AjaxAwareAuthenticationSuccessHandl
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
 
-		def usuario =  Usuario.get(authentication.getPrincipal().id)
-		
-		if(usuario.username == 'admin'){
-			redirectStrategy.sendRedirect(request, response, '/');
+		def username = authentication.getPrincipal().username
+		 
+		if (username=='admin'){
+			redirectStrategy.sendRedirect(request, response, '/usuario/index');
 		}else{
 			redirectStrategy.sendRedirect(request, response, '/usuarioEmpresa/index');
 		}
