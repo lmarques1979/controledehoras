@@ -4,9 +4,9 @@ import java.util.Date;
 
 class Horas {
 
-	int	 dia
-	int  mes
-	int  ano
+	Integer	 dia
+	Integer  mes
+	Integer  ano
 	float  totaldia
 	Date entrada1
 	Date saida1

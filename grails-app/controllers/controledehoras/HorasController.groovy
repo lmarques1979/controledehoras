@@ -345,7 +345,6 @@ class HorasController extends BaseController{
 		if(erros.size>0){
 			return erros
 		}else{
-			
 			horasInstance.entrada1	= dtentrada1
 			horasInstance.saida1	= dtsaida1
 			horasInstance.entrada2	= dtentrada2
@@ -475,22 +474,26 @@ class HorasController extends BaseController{
 		ano = params.ano[0]
 		def usuarioInstance=Usuario.get(usuarioLogado.id)
 		def nome=usuarioInstance.buscaNome(usuarioInstance)
+		def dia
 		flash.message=null
 		flash.error=null
 		usuarioLogado
 		
 		for(int i=0 ; i < total ; i++){
 			if(total>1){
+				dia = params.dia[i].toInteger()
 				obs = params.observacao[i]
 				idhorario = params.idalteracao[i]
 				totaliza=params.totalizahidden[i]
 				ind=i
 			}else{
+				dia = params.dia.toInteger()
 				obs = params.observacao
 				idhorario = params.idalteracao
 				totaliza=params.totalizahidden
 				ind=null
 			}
+			
 			
 			def horasInstance = Horas.get(Long.valueOf(idhorario).longValue())
 				
@@ -500,12 +503,12 @@ class HorasController extends BaseController{
 			Senão é um array de erros*/
 			if(retorno in Horas){
 				
+				retorno.dia=dia
 				retorno.observacao=obs
 				retorno.totaliza=Long.valueOf(totaliza).longValue()
 				retorno.totaldia = retorno.totaldia.round(3)
 				horas.add(retorno)
 					
-				retorno.clearErrors()
 				retorno.save flush:true
 		
 				if (retorno.hasErrors()) {
@@ -518,6 +521,7 @@ class HorasController extends BaseController{
 				erros=retorno
 				erro++
 				break
+				
 			}
 		}
 		if(erro==0){
